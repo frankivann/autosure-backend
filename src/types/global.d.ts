@@ -1,6 +1,6 @@
 import { Response } from 'express'
-import { Document } from 'mongoose'
-import { CAR_BRANDS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAGES, USER_ROLES } from '@src/constants'
+import { Document, Schema } from 'mongoose'
+import { CAR_BRANDS, CAR_MODELS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAGES, USER_ROLES } from '@src/constants'
 
 /**
  * User Types definitions
@@ -22,20 +22,23 @@ interface User extends Document {
 */
 
 type CarBrand = typeof CAR_BRANDS[number]
+type CarModel = typeof CAR_MODELS[number]
 type FuelType = typeof FUEL_TYPES[number]
 type TransmissionType = typeof TRANSMISSION_TYPES[number]
 type Location = typeof LOCATIONS[number]
 type Usage = typeof USAGES[number]
 
-interface CarInsurance {
+interface Cotization {
   year: number
   brand: CarBrand
-  model: string
+  model: CarModel
   fuelType: FuelType
   transmissionType: TransmissionType
   numberOfDoors: 2 | 4
   location: Location
   usage: Usage
+  price: number
+  userId: Schema.Types.ObjectId
 }
 
 /**
