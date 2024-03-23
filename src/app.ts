@@ -1,10 +1,10 @@
 import express from 'express'
+import cors from 'cors'
 import authRoutes from '@api/auth/routes'
 import userRoutes from '@api/user/routes'
 import cotizationRoutes from '@api/cotization/routes'
 import notFound from '@middlewares/not-found'
 import errorHandler from '@middlewares/error-handler'
-import cors from 'cors'
 const app = express()
 
 // config
