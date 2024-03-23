@@ -1,72 +1,53 @@
 import { Schema, model } from 'mongoose'
-import { type ICotization } from '@src/types/global'
-import { CAR_COVERAGE, CAR_INSURANCE } from '@src/constants'
+import { type CarInsurance } from '@src/types/global'
+import { CAR_BRANDS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAGES } from '@src/constants'
 
-const CotizationSchema = new Schema<ICotization>({
-  cotizationNumber: {
-    type: Number,
-    required: true,
-    default: 1
-  },
-  productionYear: {
+const CotizationSchema = new Schema<CarInsurance>({
+  year: {
     type: Number,
     required: true,
     trim: true
   },
   brand: {
     type: String,
-    required: true,
-    trim: true,
-    lowercase: true
-  },
-  cost: {
-    type: Number,
+    enum: CAR_BRANDS,
     required: true,
     trim: true
   },
-  carModel: {
+  model: {
     type: String,
     required: true,
-    trim: true,
-    lowercase: true
+    trim: true
   },
-  insurance: {
+  fuelType: {
     type: String,
-    trim: true,
-    enum: Object.values(CAR_INSURANCE),
+    enum: FUEL_TYPES,
     required: true,
-    lowercase: true
+    trim: true
   },
-  coverage: {
+  transmissionType: {
     type: String,
-    trim: true,
-    enum: Object.values(CAR_COVERAGE),
+    enum: TRANSMISSION_TYPES,
     required: true,
-    lowercase: true
+    trim: true
   },
-  userId: {
-    type: String,
-    required: true,
-    ref: 'User'
-  },
-  price: {
+  numberOfDoors: {
     type: Number,
-    required: true
-  }
-}, { timestamps: true })
-
-/**
- * Add autoincrement cotizationNumber field.
-*/
-
-CotizationSchema.pre('save', async function (next) {
-  try {
-    const lastCotization: ICotization | null = await this.model('Cotization').findOne({}, {}, { sort: { cotizationNumber: -1 } })
-    if (lastCotization == null) return
-
-    this.cotizationNumber = (lastCotization.cotizationNumber) + 1
-  } catch (error) {
-    next(error as Error)
+    enum: [2, 4],
+    required: true,
+    trim: true
+  },
+  location: {
+    type: String,
+    enum: LOCATIONS,
+    required: true,
+    trim: true
+  },
+  usage: {
+    type: String,
+    enum: USAGES,
+    required: true,
+    trim: true
   }
 })
 
