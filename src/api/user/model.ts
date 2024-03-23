@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose'
-import { type IUser } from '@src/types/global'
+import { type User } from '@src/types/global'
 import { USER_ROLES } from '@src/constants'
 
-const UserSchema = new Schema<IUser>({
+const UserSchema = new Schema<User>({
   firstname: {
     type: String,
     required: true,
