@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import { Document } from 'mongoose'
-import { CAR_COVERAGE, CAR_INSURANCE } from '@src/constants'
+import { CAR_BRANDS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAGES, USER_ROLES } from '@src/constants'
 
 /**
  * User Types definitions
@@ -8,7 +8,7 @@ import { CAR_COVERAGE, CAR_INSURANCE } from '@src/constants'
 
 type UserRoles = typeof USER_ROLES[keyof typeof USER_ROLES]
 
-interface IUser extends Document {
+interface User extends Document {
   firstname: string
   lastname: string
   username: string
@@ -21,19 +21,21 @@ interface IUser extends Document {
  * Cotization Types definitions
 */
 
-type Insurance = typeof CAR_INSURANCE[keyof typeof CAR_INSURANCE]
-type Coverage = typeof CAR_COVERAGE[keyof typeof CAR_COVERAGE]
+type CarBrand = typeof CAR_BRANDS[number]
+type FuelType = typeof FUEL_TYPES[number]
+type TransmissionType = typeof TRANSMISSION_TYPES[number]
+type Location = typeof LOCATIONS[number]
+type Usage = typeof USAGES[number]
 
-interface ICotization extends Document {
-  cotizationNumber: number
-  productionYear: number
-  brand: string
-  cost: number
-  carModel: string
-  insurance: Insurance
-  coverage: Coverage
-  userId: string
-  price: number
+interface CarInsurance {
+  year: number
+  brand: CarBrand
+  model: string
+  fuelType: FuelType
+  transmissionType: TransmissionType
+  numberOfDoors: 2 | 4
+  location: Location
+  usage: Usage
 }
 
 /**
