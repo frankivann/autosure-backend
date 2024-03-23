@@ -3,8 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 const { ACCESS_TOKEN_SECRET } = process.env
 
 export function authorization (req: Request, res: Response, next: NextFunction): void {
-  const { headers } = req
-  const { authorization } = headers
+  const { authorization } = req.headers
 
   if (authorization == null) {
     res.status(403).json({ error: true, message: 'Ha ocurrido un error' })
