@@ -40,21 +40,13 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
   }
 }
 
-export async function preCotization (_: Request, res: Response, next: NextFunction): Promise<void> {
-  try {
-    res.json({ m: 'm' })
-  } catch (error) {
-    next(error)
-  }
-}
-
 export async function addCotization (req: Request, res: Response, next: NextFunction): Promise<void> {
-  // const { body, userId } = req
+  const { body, userId } = req
 
   try {
-    // const newCotization = new CotizationModel({ ...body, userId })
+    const newCotization = new CotizationModel({ ...body, userId: '65fee13c17ff9e06bfa6df7d' })
 
-    // await newCotization.save()
+    await newCotization.save()
     res.status(201).json({ message: 'Cotización agregada correctamente' })
   } catch (error) {
     next(error)
