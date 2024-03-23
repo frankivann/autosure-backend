@@ -3,13 +3,8 @@ export const USER_ROLES = {
   ADMIN: 'admin'
 } as const
 
-export const CAR_INSURANCE = {
-  TERCEROS: 'terceros',
-  COMPLETO: 'completo'
-} as const
-
-export const CAR_COVERAGE = {
-  RESPONSABILIDAD_CIVIL: 'responsabilidad civil',
-  LIMITADA: 'limitada',
-  AMPLIA: 'amplia'
-} as const
+export const CAR_BRANDS = ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Volkswagen', 'Nissan', 'BMW', 'Mercedes-Benz', 'Audi', 'Hyundai'] as const
+export const FUEL_TYPES = ['Gasoline', 'Diesel', 'Hybrid', 'Electric'] as const
+export const TRANSMISSION_TYPES = ['Automatic', 'Manual'] as const
+export const LOCATIONS = ['City', 'Rural'] as const
+export const USAGES = ['Personal', 'Commercial'] as const
