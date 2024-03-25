@@ -14,7 +14,7 @@ export async function signup (req: Request, res: Response, next: NextFunction): 
 
     const user = await UserModel.findOne({ username })
     if (user != null) {
-      res.status(400).json({ message: 'El usuario ya existe' })
+      res.status(400).json({ error: true, message: 'El usuario ya existe' })
       return
     }
 
