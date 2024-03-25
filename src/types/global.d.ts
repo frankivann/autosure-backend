@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import { Document, Schema } from 'mongoose'
+import { Schema } from 'mongoose'
 import { CAR_BRANDS, CAR_MODELS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAGES, USER_ROLES } from '@src/constants'
 
 /**
@@ -8,7 +8,7 @@ import { CAR_BRANDS, CAR_MODELS, FUEL_TYPES, LOCATIONS, TRANSMISSION_TYPES, USAG
 
 type UserRoles = typeof USER_ROLES[keyof typeof USER_ROLES]
 
-interface User extends Document {
+interface User {
   firstname: string
   lastname: string
   username: string
