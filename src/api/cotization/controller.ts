@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 // import { USER_ROLES } from '@src/constants'
 import UserModel from '@api/user/model'
 import CotizationModel from './model'
+import type { Cotization } from '@src/types/global'
+import { CARS } from '@src/constants'
 
 export async function getCotizations (req: Request, res: Response, next: NextFunction): Promise<void> {
   // const { userRole } = req
@@ -12,7 +14,10 @@ export async function getCotizations (req: Request, res: Response, next: NextFun
     //   return
     // }
 
-    const cotizations = await CotizationModel.find({})
+    const cotizations = await CotizationModel.find({}).populate('userId', {
+      firstname: 1,
+      lastname: 1
+    })
     res.json({ cotizations })
   } catch (error) {
     next(error)
@@ -42,9 +47,23 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
 
 export async function addCotization (req: Request, res: Response, next: NextFunction): Promise<void> {
   const { body, userId } = req
+  const { brand, model }: Cotization = body as Cotization
 
   try {
-    const newCotization = new CotizationModel({ ...body, userId: '65fee13c17ff9e06bfa6df7d' })
+    /**
+     * Validate cars model
+     */
+    const models = CARS[brand]
+    const isValidModel = models.includes(model)
+
+    if (!isValidModel) {
+      res.status(400).json({ error: true, message: 'Bad request' })
+      return
+    }
+
+    const newCotization = new CotizationModel({ ...body, userId })
+
+    console.log(newCotization)
 
     await newCotization.save()
     res.status(201).json({ message: 'Cotización agregada correctamente' })
