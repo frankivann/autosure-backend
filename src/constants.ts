@@ -8,7 +8,7 @@ export const TRANSMISSION_TYPES = ['Automatic', 'Manual'] as const
 export const LOCATIONS = ['City', 'Rural'] as const
 export const USAGES = ['Personal', 'Commercial'] as const
 
-export const CARS = {
+export const CARS: Record<string, string[]> = {
   Toyota: ['Corolla', 'Camry', 'RAV4', 'Prius'],
   Honda: ['Civic', 'Accord', 'CR-V', 'HR-V'],
   Ford: ['Fiesta', 'Focus', 'Fusion', 'Escape'],
