@@ -57,6 +57,8 @@ UserSchema.set('toJSON', {
     delete returnedObj._id
     delete returnedObj.__v
     delete returnedObj.password
+    delete returnedObj.createdAt
+    delete returnedObj.updatedAt
   }
 })
 
