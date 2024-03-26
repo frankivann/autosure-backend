@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
-// import { USER_ROLES } from '@src/constants'
 import UserModel from '@api/user/model'
 import CotizationModel from './model'
 import type { Cotization } from '@src/types/global'
-import { CARS } from '@src/constants'
+import { CARS, USER_ROLES } from '@src/constants'
 
 export async function getCotizations (req: Request, res: Response, next: NextFunction): Promise<void> {
   // const { userRole } = req
@@ -62,8 +61,6 @@ export async function addCotization (req: Request, res: Response, next: NextFunc
     }
 
     const newCotization = new CotizationModel({ ...body, userId })
-
-    console.log(newCotization)
 
     await newCotization.save()
     res.status(201).json({ message: 'Cotización agregada correctamente' })
