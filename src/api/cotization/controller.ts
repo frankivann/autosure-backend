@@ -5,14 +5,7 @@ import type { Cotization } from '@src/types/global'
 import { CARS, USER_ROLES } from '@src/constants'
 
 export async function getCotizations (req: Request, res: Response, next: NextFunction): Promise<void> {
-  // const { userRole } = req
-
   try {
-    // if (userRole !== USER_ROLES.ADMIN) {
-    //   res.status(401).json({ error: true, message: 'Permitido solo a administración' })
-    //   return
-    // }
-
     const cotizations = await CotizationModel.find({}).populate('userId', {
       firstname: 1,
       lastname: 1
