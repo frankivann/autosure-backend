@@ -14,7 +14,7 @@ export async function signup (req: Request, res: Response, next: NextFunction): 
 
     const user = await UserModel.findOne({ username })
     if (user != null) {
-      res.status(400).json({ error: true, message: 'El usuario ya existe' })
+      res.status(400).json({ error: true, message: 'User already exists' })
       return
     }
 
@@ -34,7 +34,7 @@ export async function signup (req: Request, res: Response, next: NextFunction): 
     })
 
     await newUser.save()
-    res.status(201).json({ message: 'Usuario creado correctamente' })
+    res.status(201).json({ message: 'User created successfully' })
   } catch (error) {
     next(error)
   }
@@ -50,7 +50,7 @@ export async function signin (req: Request, res: Response, next: NextFunction): 
 
     const user = await UserModel.findOne({ username })
     if (user == null) {
-      res.status(400).json({ error: true, message: 'Credenciales inválidas' })
+      res.status(400).json({ error: true, message: 'Invalid Credentials' })
       return
     }
 
@@ -60,7 +60,7 @@ export async function signin (req: Request, res: Response, next: NextFunction): 
 
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) {
-      res.status(400).json({ error: true, message: 'Credenciales inválidas' })
+      res.status(400).json({ error: true, message: 'Invalid Credentials' })
       return
     }
 

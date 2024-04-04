@@ -6,11 +6,11 @@ export function authorization (req: Request, res: Response, next: NextFunction):
   const { authorization } = req.headers
 
   if (authorization == null) {
-    res.status(403).json({ error: true, message: 'Ha ocurrido un error' })
+    res.status(403).json({ error: true, message: 'An error has occurred' })
     return
   }
   if (!authorization.toLowerCase().startsWith('bearer ')) {
-    res.status(403).json({ error: true, message: 'Ha ocurrido un error' })
+    res.status(403).json({ error: true, message: 'An error has occurred' })
     return
   }
 

@@ -9,7 +9,7 @@ const ERROR_HANDLER: ErrorHandlerDictionary = {
     res.status(400).json({ erorr: true, message: 'Bad request' })
   },
   TokenExpiredError: (res: Response) => {
-    res.status(401).json({ error: true, message: 'Sesión expirada' })
+    res.status(401).json({ error: true, message: 'Session expired' })
   },
   Default: (res: Response) => {
     res.status(500).json({ erorr: true, message: 'Internal server error' })

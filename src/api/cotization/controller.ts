@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import UserModel from '@api/user/model'
 import CotizationModel from './model'
 import type { Cotization } from '@src/types/global'
-import { CARS, USER_ROLES } from '@src/constants'
+import { CARS } from '@src/constants'
 
 export async function getCotizations (req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -26,7 +26,7 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
 
     const user = await UserModel.findById(userId)
     if (user == null) {
-      res.status(406).json({ error: true, message: 'Ha ocurrido un error' })
+      res.status(406).json({ error: true, message: 'An error has occurred' })
       return
     }
 
@@ -56,7 +56,7 @@ export async function addCotization (req: Request, res: Response, next: NextFunc
     const newCotization = new CotizationModel({ ...body, userId })
 
     await newCotization.save()
-    res.status(201).json({ message: 'Cotización agregada correctamente' })
+    res.status(201).json({ message: 'Quote added successfully' })
   } catch (error) {
     next(error)
   }
