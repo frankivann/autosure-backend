@@ -29,6 +29,7 @@ type Location = typeof LOCATIONS[number]
 type Usage = typeof USAGES[number]
 
 interface Cotization {
+  id: Schema.Types.ObjectId
   year: number
   brand: CarBrand
   model: CarModel
