@@ -30,8 +30,38 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
       return
     }
 
-    const cotizations = await CotizationModel.find({ userId })
-    res.json({ cotizations })
+    const cotizations = await CotizationModel.find<Cotization>({ userId })
+
+    /**
+     * Get data to graphics
+     */
+
+    const numberOfQuotes = cotizations.length
+    const quotes = cotizations.map(({ id, brand, model, fuelType, usage, price }) => ({
+      id,
+      brand,
+      model,
+      fuelType,
+      usage,
+      price
+    }))
+
+    const brands = quotes.map(quote => quote.brand)
+    const uniques = [...new Set(brands)]
+
+    const mappedQuotes = uniques.map(brand => ({
+      name: brand,
+      value: quotes.filter(quote => quote.brand === brand).length
+    }))
+
+    const sortted = [...mappedQuotes].sort((a, b) => b.value - a.value)
+    const top3Brands = sortted.slice(0, 3)
+
+    res.json({
+      numberOfQuotes,
+      top3Brands,
+      quotes
+    })
   } catch (error) {
     next(error)
   }
@@ -45,7 +75,14 @@ export async function addCotization (req: Request, res: Response, next: NextFunc
     /**
      * Validate cars model
      */
+
     const models = CARS[brand]
+
+    if (models == null) {
+      res.status(400).json({ error: true, message: 'Bad request' })
+      return
+    }
+
     const isValidModel = models.includes(model)
 
     if (!isValidModel) {
