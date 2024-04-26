@@ -46,6 +46,6 @@ interface Cotization {
  * Utils Types definitions
  */
 
-export interface ErrorHandlerDictionary {
+interface ErrorHandlerDictionary {
   [key: string]: (res: Response<any, Record<string, any>>) => void
 }
