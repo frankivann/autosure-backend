@@ -93,7 +93,7 @@ export async function addCotization (req: Request, res: Response, next: NextFunc
     const newCotization = new CotizationModel({ ...body, userId })
 
     await newCotization.save()
-    res.status(201).json({ message: 'Quote added successfully' })
+    res.status(201).json({ message: 'Cotization added successfully' })
   } catch (error) {
     next(error)
   }
