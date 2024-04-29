@@ -36,8 +36,8 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
      * Get data to graphics
      */
 
-    const numberOfQuotes = cotizations.length
-    const quotes = cotizations.map(({ id, brand, model, fuelType, usage, price }) => ({
+    const numberOfCotizations = cotizations.length
+    const records = cotizations.map(({ id, brand, model, fuelType, usage, price }) => ({
       id,
       brand,
       model,
@@ -46,21 +46,21 @@ export async function getUserCotizations (req: Request, res: Response, next: Nex
       price
     }))
 
-    const brands = quotes.map(quote => quote.brand)
+    const brands = records.map(record => record.brand)
     const uniques = [...new Set(brands)]
 
-    const mappedQuotes = uniques.map(brand => ({
+    const mappedRecords = uniques.map(brand => ({
       name: brand,
-      value: quotes.filter(quote => quote.brand === brand).length
+      value: records.filter(record => record.brand === brand).length
     }))
 
-    const sortted = [...mappedQuotes].sort((a, b) => b.value - a.value)
+    const sortted = [...mappedRecords].sort((a, b) => b.value - a.value)
     const top3Brands = sortted.slice(0, 3)
 
     res.json({
-      numberOfQuotes,
-      top3Brands,
-      quotes
+      numberOfCotizations,
+      records,
+      top3Brands
     })
   } catch (error) {
     next(error)
